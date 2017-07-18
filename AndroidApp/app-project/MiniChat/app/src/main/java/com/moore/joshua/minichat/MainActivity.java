@@ -48,40 +48,41 @@ public class MainActivity extends AppCompatActivity {
         msgET.setMovementMethod(new ScrollingMovementMethod());
     }
 
-    public void connect(View view) {
-        if (!didItWork) {
-            username = msgET.getText().toString();
-            System.out.println(ipAddressET.getText().toString() + " " + Integer.parseInt(portET.getText().toString()));
-            messageTV.append("Going to try to connect...");
-            server = ipAddressET.getText().toString();
-            port = Integer.parseInt(portET.getText().toString());
-            new ConnectTask().execute();
-        } else {
-            System.out.println("Sending a message!");
-            massage = msgET.getText().toString();
-            new SendTask().execute();
+    public void connect(View view) { // Attempt to connect to the server
+        if (!didItWork) { // Check if the server is already connected. If not, try to connect
+            username = msgET.getText().toString(); // Retrieve the username from the EditText
+            System.out.println(ipAddressET.getText().toString() + " " + Integer.parseInt(portET.getText().toString())); // Debug
+            messageTV.append("Going to try to connect..."); // Alert the user that the app is trying to connect
+            server = ipAddressET.getText().toString(); // Retrieve the IP address from the EditText
+            port = Integer.parseInt(portET.getText().toString()); // Retrieve the port from the EditText
+            new ConnectTask().execute(); // Tell the networking class to start connecting
+        } else { // If server is already connected then send a message
+            System.out.println("Sending a message!"); // Debug
+            massage = msgET.getText().toString(); // Retrieve the message from the EditText
+            new SendTask().execute(); // Tell the other networking class to send the message
         }
     }
 
-    public void notifications() {
-        NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this).setSmallIcon(R.drawable.common_google_signin_btn_icon_dark).setContentTitle("MiniChat Message").setContentText(theMessage);
+    public void notifications() { // Display a notification whenever a message is received (fixes required)
+        NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher_chatva).setContentTitle("MiniChat Message").setContentText(theMessage);
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(1,mBuilder.build());
     }
 
-    private class ListenTask extends AsyncTask<Object, String, Object> {
+    private class ListenTask extends AsyncTask<Object, String, Object> { // This class waits for messages to be received
         @Override
-        protected Object doInBackground(Object[] params) {
-            System.out.println("Starting loop");
+        protected Object doInBackground(Object[] params) { // Do the task in the background
+            System.out.println("Starting loop"); // Debug
             String msg3;
-            while (true) {
+            while (true) { // Forever loop is safe here since it is Asynchronous is a separate thread
                 try {
-                    msg3 = sInput.readUTF();
-                    System.out.println(msg3);
+                    msg3 = sInput.readUTF(); // Convert the incoming data into a readable format
+                    System.out.println(msg3); // Debug
                     theMessage = msg3;
-                    publishProgress(msg3);
+                    publishProgress(msg3); // Send information (msg3) to other method
                 } catch (IOException e) {
-                    System.out.println("Server has close the connection: " + e);
+                    System.out.println("Server has closed the connection: " + e);
                     msg3 = "Error\n";
                     publishProgress(msg3);
                     break;
@@ -89,88 +90,88 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("Error: " + um);
                 }
             }
-            return null;
+            return null; // We must have a return statement, but it must be null since the forever loop makes it inaccessible
         }
 
         @Override
-        protected void onProgressUpdate(String[] text) {
-            System.out.println(theMessage);
-            String[] splitter = theMessage.split(":");
-            int getcolor = MainActivity.messageTV.getCurrentTextColor();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                MainActivity.messageTV.setTextColor(getResources().getColor(R.color.blacky,null));
+        protected void onProgressUpdate(String[] text) { // This interacts with the UI and the rest of the program
+            System.out.println(theMessage); // Debug
+            String[] splitter = theMessage.split(":"); // Split the string by the : character
+            int getcolor = MainActivity.messageTV.getCurrentTextColor(); // Get the current color from the TextView
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { // Not sure why this is required but it crashes without it
+                MainActivity.messageTV.setTextColor(getResources().getColor(R.color.blacky,null)); // Set color to what it was before -_-
             }
-            MainActivity.messageTV.append(splitter[0] + ":");
-            MainActivity.messageTV.setTextColor(getcolor);
-            for(int i = 1; i < splitter.length; i++) {
-                MainActivity.messageTV.append(splitter[i]);
+            MainActivity.messageTV.append(splitter[0] + ":"); // Append some info to  the TextView
+            MainActivity.messageTV.setTextColor(getcolor); // Set the color again for some reason
+            for(int i = 1; i < splitter.length; i++) { // Append everything from the info to the TextView
+                MainActivity.messageTV.append(splitter[i]); // That comment should be here ^^^
             }
-            notifications();
-            System.out.println("updated and notified.");
+            notifications(); // Call a notification task
+            System.out.println("updated and notified."); // Debug
         }
 
         @Override
         protected void onPostExecute(Object o) {
-            System.out.println("It ended unfortunately");
+            System.out.println("It ended unfortunately"); // Something required but we don't ever use
         }
     }
 
-    private class ConnectTask extends AsyncTask<Object, Object, Object> {
+    private class ConnectTask extends AsyncTask<Object, Object, Object> { // Fun networking class
         @Override
-        protected Object doInBackground(Object[] params) {
+        protected Object doInBackground(Object[] params) { // Do the task in the background
             try {
-                System.out.println("Socketing");
-                InetAddress address = InetAddress.getByName(server);
-                String host = address.getHostName();
-                socket = new Socket(host, port);
-            } catch (Exception ec) {
-                System.out.println("Error connecting to server:" + ec);
+                System.out.println("Socketing"); // Debug
+                InetAddress address = InetAddress.getByName(server); // Get IP from variable
+                String host = address.getHostName(); // Convert the address to a usable string for Sockets
+                socket = new Socket(host, port); // Create the socket and connect to it
+            } catch (Exception ec) { // Catch if connecting fails and print the error (its a sysout so its useless but whatever)
+                System.out.println("Error connecting to server:" + ec); // Debug
                 return false;
             }
-            String msg = "Connection accepted " + socket.getInetAddress() + ":" + socket.getPort();
-            System.out.println(msg);
-            try {
+            String msg = "Connection accepted " + socket.getInetAddress() + ":" + socket.getPort(); // Accepted
+            System.out.println(msg); // Debug
+            try { // Just create In/Out streams, this 99.9% never fails
                 sInput = new DataInputStream(socket.getInputStream());
                 sOutput = new DataOutputStream(socket.getOutputStream());
-            } catch (IOException eIO) {
+            } catch (IOException eIO) { // Catch if it does fail somehow
                 System.out.println("Exception creating new Input/output Streams: " + eIO);
                 return false;
             }
             try {
-                sOutput.writeUTF(username);
-                sOutput.flush();
-            } catch (IOException eIO) {
+                sOutput.writeUTF(username); // Send the username to the server
+                sOutput.flush(); // Clear out the OutputStream to be used for messages
+            } catch (IOException eIO) { // SO MANY TRY/CATCHES!!
                 System.out.println("Exception doing login : " + eIO);
                 return false;
             }
-            didItWork = true;
+            didItWork = true; // It. Worked.
             return true;
         }
 
-        @SuppressLint("SetTextI18n")
-        @Override
-        protected void onPostExecute(Object o) {
-            if (didItWork) {
-                MainActivity.messageTV.append(" Success\n");
-                button.setText("Send");
-                AsyncTaskCompat.executeParallel(new ListenTask());
+        @SuppressLint("SetTextI18n") // Required. Not sure what it does
+        @Override // I love how many Overrides are required for Android development
+        protected void onPostExecute(Object o) { // When the background task is finished do this stuff
+            if (didItWork) { // If it worked -_-
+                MainActivity.messageTV.append(" Success\n"); // Alert the user they have successfully connected
+                button.setText("Send"); // Change the connect button to say Send
+                AsyncTaskCompat.executeParallel(new ListenTask()); // Allow for messages to received
             } else {
-                MainActivity.messageTV.append(" Failure\n");
+                MainActivity.messageTV.append(" Failure\n"); // Welp, we failed
             }
         }
     }
 
-    private class SendTask extends AsyncTask<Object, Object, Object> {
+    private class SendTask extends AsyncTask<Object, Object, Object> { // The task that sends messages
         @Override
-        protected Object doInBackground(Object[] params) {
+        protected Object doInBackground(Object[] params) { // Do the task in the background
             try {
-                System.out.println("sending the damn utf\n");
-                sOutput.writeUTF(massage);
-                System.out.println("flushing the damn thing\n");
-                sOutput.flush();
-                System.out.println("done");
+                System.out.println("sending the damn utf\n"); // I got mad here cause it didn't work
+                sOutput.writeUTF(massage); // Send the message (massage?)
+                System.out.println("flushing the damn thing\n"); // Still mad I guess
+                sOutput.flush(); // Flush the OutputStream for more messages
+                System.out.println("done"); // The first time I saw this I was very happy
             } catch (IOException ecxc) {
-                System.out.println(ecxc.toString());
+                System.out.println(ecxc.toString()); // Saw this error a lot... also  // Debug
             }
             return null;
         }
@@ -178,6 +179,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Object o) {
             msgET.setText("");
-        }
+        } // Clear the message EditText
     }
 }
+
+/*
+Developed by Joshua Moore.
+
+I honestly cannot believe this WORKS in one .java file without any errors. Good job me.
+
+Majority of networking code was found on the internet. If I find the creator, I will credit him/her everywhere possible.
+ */
