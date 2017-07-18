@@ -1,6 +1,5 @@
 v 0.5.0
 - Code modifications from outdated project
-Client Changes:
-- Invalid for changelog
-Server Changes:
-- Invalid for changelog
+
+v 0.5.1
+- Added parameters for executing in a terminal
