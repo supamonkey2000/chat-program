@@ -1,5 +1,9 @@
-# chat-program
+# chat-program (Chatva)
 Java based client-server chat program for desktop and Android\*.
+
+**Current versions:**
+Desktop v 0.5.0
+Android v 0.2.2
 
 **Chat-program** is a simple chat program. It allows instant, lightweight text
 communication between any device running Java (this includes the Android
@@ -23,5 +27,3 @@ The program can run on either 32- or 64-bit systems running Java.
 \* *There are currently NO plans the develop an iOS app. If an iOS developer
 is interested in developing one based around my server, feel free to contact
 me via a Pull request.*
-
-Possible name: Chatva
