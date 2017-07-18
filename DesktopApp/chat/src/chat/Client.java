@@ -1,6 +1,5 @@
 package chat;
 
-
 import java.net.*;
 import java.io.*;
 import java.util.*;
@@ -105,7 +104,7 @@ public class Client  {
 	 */
 	void sendMessage(ChatMessage msg) {
 		try {
-			sOutput.writeObject(msg);
+			sOutput.writeObject(msg.getType()+":"+msg.getMessage());
 		}
 		catch(IOException e) {
 			display("Exception writing to server: " + e);

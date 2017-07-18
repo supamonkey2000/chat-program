@@ -1,0 +1,2 @@
+0.5.0 Bugs:
+- Logout button disconnects, but no changes to UI are made and no indication of disconnect (NOT fixed)

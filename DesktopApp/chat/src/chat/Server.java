@@ -1,4 +1,6 @@
 package chat;
+
+
 import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;
@@ -52,7 +54,6 @@ public class Server {
 			display(msg);
 		}
 	}
-	@SuppressWarnings("resource")
 	protected void stop() {
 		keepGoing = false;
 		try {
@@ -128,13 +129,14 @@ public class Server {
 				sOutput = new ObjectOutputStream(socket.getOutputStream());
 				sInput  = new ObjectInputStream(socket.getInputStream());
 				username = (String) sInput.readObject();
-				display(username + " just connected.");
+				System.out.println(username + " just connected.");
 			}
 			catch (IOException e) {
 				display("Exception creating new Input/output Streams: " + e);
 				return;
 			}
 			catch (ClassNotFoundException e) {
+				System.out.println("Class not found thingabob: " + e);
 			}
             date = new Date().toString() + "\n";
 		}
@@ -142,7 +144,12 @@ public class Server {
 			boolean keepGoing = true;
 			while(keepGoing) {
 				try {
-					cm = (ChatMessage) sInput.readObject();
+					//cm = (ChatMessage) sInput.readObject();
+					String data = sInput.readObject().toString();
+					String[] splitdata = data.split(":");
+					int type = Integer.parseInt(splitdata[0]);
+					String readmessage = splitdata[1];
+					cm = new ChatMessage(type, readmessage);
 				}
 				catch (IOException e) {
 					display(username + " Exception reading Streams: " + e);break;				

@@ -97,13 +97,13 @@ public class ClientGUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if(o == logout) {
-			client.sendMessage(new ChatMessage(ChatMessage.LOGOUT, ""));
+			client.sendMessage(new ChatMessage(ChatMessage.LOGOUT,""));
 			tfServer.setEditable(true);
 			tfPort.setEditable(true);
 			return;
 		}
 		if(o == whoIsIn) {
-			client.sendMessage(new ChatMessage(ChatMessage.WHOISIN, ""));				
+			client.sendMessage(new ChatMessage(ChatMessage.WHOISIN,""));				
 			return;
 		}
 		if(connected) {
