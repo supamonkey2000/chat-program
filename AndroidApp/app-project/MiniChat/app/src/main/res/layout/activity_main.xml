@@ -52,7 +52,8 @@
         android:maxLines="17"
         android:scrollbars="vertical"
         android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:gravity="top"/>
+        android:gravity="bottom"
+        />
 
     <EditText
         android:layout_width="400dp"
