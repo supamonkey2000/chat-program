@@ -16,6 +16,9 @@ application).
    of the server. Enter a username, then connect.
 4. Enter messages and hit send to chat.
 
+To use with a command line or terminal, put `help` after the name of the jar 
+file, like `java -jar chatva-d_v_x.x.x.jar help`.
+
 The program can run on either 32- or 64-bit systems running Java.
 
 **Future plans:**
@@ -24,6 +27,6 @@ The program can run on either 32- or 64-bit systems running Java.
 3. Implement remote server management
 4. Detect if client has been inactive for too long, then request a kick
 
-\* *There are currently NO plans the develop an iOS app. If an iOS developer
+\* *There are currently NO plans to develop an iOS app. If an iOS developer
 is interested in developing one based around my server, feel free to contact
 me via a Pull request.*
