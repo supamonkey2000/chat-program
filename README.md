@@ -23,3 +23,5 @@ The program can run on either 32- or 64-bit systems running Java.
 \* *There are currently NO plans the develop an iOS app. If an iOS developer
 is interested in developing one based around my server, feel free to contact
 me via a Pull request.*
+
+Possible name: Chatva

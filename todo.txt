@@ -1,0 +1,6 @@
+Android:
+- Dont allow for hitting Return in message box
+
+Desktop:
+- Fix client information fields after disconnect (they become uneditable)
+- Change "lookandfeel" to match system (?) (this may not work on Mac)
