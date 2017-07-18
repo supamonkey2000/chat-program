@@ -1,4 +1,4 @@
-package chatOther;
+package chat;
 import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;
@@ -52,6 +52,7 @@ public class Server {
 			display(msg);
 		}
 	}
+	@SuppressWarnings("resource")
 	protected void stop() {
 		keepGoing = false;
 		try {

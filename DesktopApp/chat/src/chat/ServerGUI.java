@@ -1,14 +1,19 @@
-package chatOther;
+package chat;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 public class ServerGUI extends JFrame implements ActionListener, WindowListener {
 	private static final long serialVersionUID = 1L;
+	
 	private JButton stopStart;
 	private JTextArea chat, event;
 	private JTextField tPortNumber;
 	private Server server;
+	
 	ServerGUI(int port) {
+		// This is someone elses code. There are no errors. I am not going to comment anything.
 		super("Chat Server");
 		server = null;
 		JPanel north = new JPanel();

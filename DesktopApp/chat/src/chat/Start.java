@@ -1,17 +1,10 @@
-package chatOther;
-
+package chat;
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
 public class Start extends JFrame {
-	/**
-	 * @author joshuacm18
-	 */
 	private static final long serialVersionUID = 1L;
-	
-	
 	
 	private JButton serverB, clientB;
 	
@@ -47,6 +40,7 @@ public class Start extends JFrame {
 	}
 	
 	public static void main(String[] args) {
+		try{UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}catch(Exception ex){ex.printStackTrace();}
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -54,5 +48,4 @@ public class Start extends JFrame {
 			}
 		});
 	}
-	
 }
