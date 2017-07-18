@@ -1,0 +1,7 @@
+v 0.2.1
+- (No log recorded)
+(Broken with server, do not use)
+
+v 0.2.2
+- Bug Fixes
+(Use with server 0.5.0 or later)

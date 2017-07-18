@@ -13,8 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     public static Button button;
     public static boolean didItWork;
     public String massage;
-    public DataInputStream sInput;
-    public DataOutputStream sOutput;
+    public ObjectInputStream sInput;
+    public ObjectOutputStream sOutput;
     public Socket socket;
     public String server, username;
     public int port;
@@ -64,8 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void notifications() { // Display a notification whenever a message is received (fixes required)
-        NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher_chatva).setContentTitle("MiniChat Message").setContentText(theMessage);
+        NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this).setSmallIcon(R.mipmap.ic_launcher_chatva).setContentTitle("MiniChat Message").setContentText(theMessage);
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(1,mBuilder.build());
     }
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             String msg3;
             while (true) { // Forever loop is safe here since it is Asynchronous is a separate thread
                 try {
-                    msg3 = sInput.readUTF(); // Convert the incoming data into a readable format
+                    msg3 = (String) sInput.readObject(); // Convert the incoming data into a readable format
                     System.out.println(msg3); // Debug
                     theMessage = msg3;
                     publishProgress(msg3); // Send information (msg3) to other method
@@ -131,14 +130,15 @@ public class MainActivity extends AppCompatActivity {
             String msg = "Connection accepted " + socket.getInetAddress() + ":" + socket.getPort(); // Accepted
             System.out.println(msg); // Debug
             try { // Just create In/Out streams, this 99.9% never fails
-                sInput = new DataInputStream(socket.getInputStream());
-                sOutput = new DataOutputStream(socket.getOutputStream());
+                sInput = new ObjectInputStream(socket.getInputStream());
+                sOutput = new ObjectOutputStream(socket.getOutputStream());
             } catch (IOException eIO) { // Catch if it does fail somehow
                 System.out.println("Exception creating new Input/output Streams: " + eIO);
                 return false;
             }
             try {
-                sOutput.writeUTF(username); // Send the username to the server
+                sOutput.writeObject(username); // Send the username to the server
+                System.out.println(username); // Debug
                 sOutput.flush(); // Clear out the OutputStream to be used for messages
             } catch (IOException eIO) { // SO MANY TRY/CATCHES!!
                 System.out.println("Exception doing login : " + eIO);
@@ -165,8 +165,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Object doInBackground(Object[] params) { // Do the task in the background
             try {
-                System.out.println("sending the damn utf\n"); // I got mad here cause it didn't work
-                sOutput.writeUTF(massage); // Send the message (massage?)
+                System.out.println("sending the damn thing\n"); // I got mad here cause it didn't work
+                System.out.println(massage); // Debug
+                sOutput.writeObject("1:"+massage); // Send the message (massage?)
                 System.out.println("flushing the damn thing\n"); // Still mad I guess
                 sOutput.flush(); // Flush the OutputStream for more messages
                 System.out.println("done"); // The first time I saw this I was very happy
@@ -182,11 +183,3 @@ public class MainActivity extends AppCompatActivity {
         } // Clear the message EditText
     }
 }
-
-/*
-Developed by Joshua Moore.
-
-I honestly cannot believe this WORKS in one .java file without any errors. Good job me.
-
-Majority of networking code was found on the internet. If I find the creator, I will credit him/her everywhere possible.
- */
