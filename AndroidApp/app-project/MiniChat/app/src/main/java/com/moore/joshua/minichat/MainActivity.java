@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void notifications() { // Display a notification whenever a message is received (fixes required)
         if(!foregrounded()) {
-            NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this).setSmallIcon(R.mipmap.ic_launcher_chatva).setContentTitle("Chatva Message").setContentText(theMessage);
+            NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this).setSmallIcon(R.drawable.ic_stat_chatva).setContentTitle("Chatva Message").setContentText(theMessage);
             NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             Notification note = mBuilder.build();
             note.defaults |= Notification.DEFAULT_VIBRATE;

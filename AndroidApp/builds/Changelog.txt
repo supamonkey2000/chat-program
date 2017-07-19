@@ -16,3 +16,8 @@ v 0.2.3
 v 0.2.4
 - Removed notifications when app is in foreground
 (Use with server 0.5.0 or later)
+
+v 0.2.5
+- Changed notification icon
+- Changed app icon
+(Use with server 0.5.2 or later)
