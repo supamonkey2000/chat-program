@@ -2,7 +2,7 @@
 Java based client-server chat program for desktop and Android\*.
 
 **Current versions:**
-Desktop v 0.5.2
+Desktop v 0.5.3
 Android v 0.2.7
 
 **Chat-program** is a simple chat program. It allows instant, lightweight text
