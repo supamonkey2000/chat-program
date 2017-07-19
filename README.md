@@ -4,9 +4,7 @@
 
 Java based client-server chat program for desktop and Android\*.
 
-**Current versions:**
-Desktop v 0.5.3
-Android v 0.2.7
+**Current Release:** [v0.1-beta](https://github.com/supamonkey2000/chat-program/releases/tag/v0.1-beta)
 
 **Chat-program** is a simple chat program. It allows instant, lightweight text
 communication between any device running Java (this includes the Android
