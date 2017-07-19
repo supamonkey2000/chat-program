@@ -1,5 +1,6 @@
 package com.moore.joshua.minichat;
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -19,6 +20,9 @@ import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+
+import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
+import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,13 +68,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public boolean foregrounded() {
+        ActivityManager.RunningAppProcessInfo appProcessInfo = new ActivityManager.RunningAppProcessInfo();
+        ActivityManager.getMyMemoryState(appProcessInfo);
+        return (appProcessInfo.importance == IMPORTANCE_FOREGROUND || appProcessInfo.importance == IMPORTANCE_VISIBLE);
+    }
+
     public void notifications() { // Display a notification whenever a message is received (fixes required)
-        NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this).setSmallIcon(R.mipmap.ic_launcher_chatva).setContentTitle("Chatva Message").setContentText(theMessage);
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification note = mBuilder.build();
-        note.defaults |= Notification.DEFAULT_VIBRATE;
-        note.defaults |= Notification.DEFAULT_SOUND;
-        mNotificationManager.notify(1,note);
+        if(!foregrounded()) {
+            NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this).setSmallIcon(R.mipmap.ic_launcher_chatva).setContentTitle("Chatva Message").setContentText(theMessage);
+            NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification note = mBuilder.build();
+            note.defaults |= Notification.DEFAULT_VIBRATE;
+            note.defaults |= Notification.DEFAULT_SOUND;
+            mNotificationManager.notify(1, note);
+        }
     }
 
     private class ListenTask extends AsyncTask<Object, String, Object> { // This class waits for messages to be received

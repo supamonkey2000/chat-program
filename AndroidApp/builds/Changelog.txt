@@ -10,6 +10,9 @@ v 0.2.3
 - Fixed reset on rotate bug
 - Minor change to username field
 - Strings are no longer hard-coded
-- Notifications vibrate
+- Notification's vibrate and alert lockscreen
 (Use with server 0.5.0 or later)
 
+v 0.2.4
+- Removed notifications when app is in foreground
+(Use with server 0.5.0 or later)
