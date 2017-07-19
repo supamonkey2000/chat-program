@@ -78,14 +78,13 @@ public class ServerGUI extends JFrame implements ActionListener, WindowListener 
 			server = null;
 		}
 		dispose();
-		System.exit(0);
 	}
-	public void windowClosed(WindowEvent e) {}
-	public void windowOpened(WindowEvent e) {}
-	public void windowIconified(WindowEvent e) {}
-	public void windowDeiconified(WindowEvent e) {}
-	public void windowActivated(WindowEvent e) {}
-	public void windowDeactivated(WindowEvent e) {}
+	public void windowClosed(WindowEvent e) {/*Empty method body*/}
+	public void windowOpened(WindowEvent e) {/*Empty method body*/}
+	public void windowIconified(WindowEvent e) {/*Empty method body*/}
+	public void windowDeiconified(WindowEvent e) {/*Empty method body*/}
+	public void windowActivated(WindowEvent e) {/*Empty method body*/}
+	public void windowDeactivated(WindowEvent e) {/*Empty method body*/}
 	class ServerRunning extends Thread {
 		public void run() {
 			server.start();

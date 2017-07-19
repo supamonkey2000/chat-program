@@ -78,6 +78,7 @@ public class ClientGUI extends JFrame implements ActionListener {
 	void append(String str) {
 		ta.append(str);
 		ta.setCaretPosition(ta.getText().length() - 1);
+		this.toFront();
 	}
 	
 	void connectionFailed() {
@@ -96,13 +97,13 @@ public class ClientGUI extends JFrame implements ActionListener {
 		
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
-		if(o == logout) {
+		if(o.equals(logout)) {
 			client.sendMessage(new ChatMessage(ChatMessage.LOGOUT,""));
 			tfServer.setEditable(true);
 			tfPort.setEditable(true);
 			return;
 		}
-		if(o == whoIsIn) {
+		if(o.equals(whoIsIn)) {
 			client.sendMessage(new ChatMessage(ChatMessage.WHOISIN,""));				
 			return;
 		}
@@ -112,7 +113,7 @@ public class ClientGUI extends JFrame implements ActionListener {
 			return;
 		}
 		
-		if(o == login) {
+		if(o.equals(login)) {
 			String username = tf.getText().trim();
 			if(username.length() == 0)
 				return;

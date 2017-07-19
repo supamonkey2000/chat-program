@@ -154,6 +154,7 @@ public class Server {
 					display(username + " Exception reading Streams: " + e);break;				
 				}catch(ClassNotFoundException e2){break;}
 				String message = cm.getMessage();
+				
 				switch(cm.getType()) {
 				case ChatMessage.MESSAGE:
 					broadcast(username + ": " + message);
@@ -169,6 +170,9 @@ public class Server {
 						writeMsg((i+1) + ") " + ct.username + " since " + ct.date);
 					}
 					break;
+				default:
+					System.out.println("Unknown error: user sent invalid code");
+					break;
 				}
 			}
 			remove(id);
@@ -182,7 +186,7 @@ public class Server {
 			try {
 				if(sInput != null) sInput.close();
 			}
-			catch(Exception e) {};
+			catch(Exception e) {}
 			try {
 				if(socket != null) socket.close();
 			}

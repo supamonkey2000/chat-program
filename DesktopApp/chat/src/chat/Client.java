@@ -163,6 +163,7 @@ public class Client  {
 			// > javac Client username portNumber serverAddr
 			case 3:
 				serverAddress = args[2];
+				break;
 			// > javac Client username portNumber
 			case 2:
 				try {
@@ -173,9 +174,11 @@ public class Client  {
 					System.out.println("Usage is: > java Client [username] [portNumber] [serverAddress]");
 					return;
 				}
+				break;
 			// > javac Client username
 			case 1: 
 				userName = args[0];
+				break;
 			// > java Client
 			case 0:
 				break;

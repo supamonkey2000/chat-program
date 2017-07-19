@@ -6,3 +6,6 @@ v 0.5.1
 
 v 0.5.2
 - Disabled Logout and Whoisin buttons until proper fix is found
+
+v 0.5.3
+- Added flashing alert for when a new message is received

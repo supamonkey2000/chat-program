@@ -6,7 +6,8 @@ import javax.swing.*;
 public class Start extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
-	private JButton serverB, clientB;
+	private JButton serverB;
+	private JButton clientB;
 	
 	public Start() {
 		super("Chat Program");
@@ -51,7 +52,7 @@ public class Start extends JFrame {
 		}
 		else {
 			System.out.println("Starting in Headless mode");
-			determine_args(args);
+			determineArgs(args);
 		}
 	}
 			/** Parameter format:
@@ -64,7 +65,7 @@ public class Start extends JFrame {
 			 * 	-a=<adrs>	Use specific IP address
 			 * 	-p=<port>	Use specific port
 			 */
-	public static void determine_args(String[] args) throws ArrayIndexOutOfBoundsException {
+	public static void determineArgs(String[] args) throws ArrayIndexOutOfBoundsException {
 		int tempport = 1500;
 		String tempip = "127.0.0.1";
 		String tempuser = ("CLI-user-" + Integer.toString((int)(Math.random() * 100)));
@@ -95,7 +96,7 @@ public class Start extends JFrame {
 		}
 		for(int i = 0; i < args.length; i++) {
 			if(args[i].equals("-s")) {
-				Server server = new Server(tempport);;
+				Server server = new Server(tempport);
 				server.start();
 			}
 			else if(args[i].equals("-c")) {
