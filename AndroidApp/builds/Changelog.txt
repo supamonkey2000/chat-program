@@ -23,6 +23,10 @@ v 0.2.5
 (Use with server 0.5.2 or later)
 
 v 0.2.6
-- Fixed colon bug; they now display properly
+- Fixed colon bug; they now display properly (introduced new bug by accident)
 - Version control updates
+(Use with server 0.5.2 or later)
+
+v 0.2.7
+- Fully fixed colon bug
 (Use with server 0.5.2 or later)

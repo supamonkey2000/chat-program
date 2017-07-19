@@ -119,7 +119,9 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.messageTV.append(splitter[0] + ":"); // Append some info to  the TextView
             MainActivity.messageTV.setTextColor(getcolor); // Set the color again for some reason
             for(int i = 1; i < splitter.length; i++) { // Append everything from the info to the TextView
-                MainActivity.messageTV.append(splitter[i] + ":"); // That comment should be here ^^^
+                if(i == splitter.length - 1) {
+                    MainActivity.messageTV.append(splitter[i]);
+                } else { MainActivity.messageTV.append(splitter[i] + ":"); }
             }
             notifications(); // Call a notification task
             System.out.println("updated and notified."); // Debug
