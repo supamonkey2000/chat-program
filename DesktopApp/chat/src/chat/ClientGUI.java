@@ -96,14 +96,13 @@ public class ClientGUI extends JFrame implements ActionListener {
 	}
 		
 	public void actionPerformed(ActionEvent e) {
-		Object o = e.getSource();
-		if(o.equals(logout)) {
+		if(e.getSource().equals(logout)) {
 			client.sendMessage(new ChatMessage(ChatMessage.LOGOUT,""));
 			tfServer.setEditable(true);
 			tfPort.setEditable(true);
 			return;
 		}
-		if(o.equals(whoIsIn)) {
+		if(e.getSource().equals(whoIsIn)) {
 			client.sendMessage(new ChatMessage(ChatMessage.WHOISIN,""));				
 			return;
 		}
@@ -113,7 +112,7 @@ public class ClientGUI extends JFrame implements ActionListener {
 			return;
 		}
 		
-		if(o.equals(login)) {
+		if(e.getSource().equals(login)) {
 			String username = tf.getText().trim();
 			if(username.length() == 0)
 				return;

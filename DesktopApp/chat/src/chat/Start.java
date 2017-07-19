@@ -6,9 +6,6 @@ import javax.swing.*;
 public class Start extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
-	private JButton serverB;
-	private JButton clientB;
-	
 	public Start() {
 		super("Chat Program");
 		setLayout(new FlowLayout());
@@ -19,8 +16,8 @@ public class Start extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		serverB = new JButton("Start Server");
-		clientB = new JButton("Start Client");
+		JButton serverB = new JButton("Start Server");
+		JButton clientB = new JButton("Start Client");
 		
 		add(serverB);
 		add(clientB);
