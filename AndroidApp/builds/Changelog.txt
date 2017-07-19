@@ -30,3 +30,9 @@ v 0.2.6
 v 0.2.7
 - Fully fixed colon bug
 (Use with server 0.5.2 or later)
+
+v 0.2.8
+- User can no longer hit enter in the message box
+- Port text field now has a numerical keyboard
+- IP text field now has a numerical keyboard
+(Use with server 0.5.2 or later)

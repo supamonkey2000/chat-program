@@ -1,5 +1,3 @@
 Android:
-- Dont allow for hitting Return in message box
 
 Desktop:
-- Add alerts when program is not in focus

@@ -18,7 +18,10 @@
         android:hint="@string/ipfieldhint"
         android:maxLines="1"
         android:maxLength="15"
-        android:id="@+id/ip"/>
+        android:id="@+id/ip"
+        android:lines="1"
+        android:inputType="numberDecimal"
+        android:digits="0123456789."/>
     <EditText
         android:layout_width="175dp"
         android:layout_height="wrap_content"
@@ -26,8 +29,11 @@
         android:text="@string/_defaultport"
         android:hint="@string/portfieldhint"
         android:maxLines="1"
+        android:lines="1"
         android:maxLength="5"
-        android:id="@+id/port"/>
+        android:id="@+id/port"
+        android:inputType="number"
+        android:digits="0123456789"/>
 
     <Button
         android:layout_width="100dp"
@@ -67,7 +73,11 @@
         android:text="@string/username"
         android:textAlignment="gravity"
         android:gravity="top"
-        android:maxLines="4" />
+        android:maxLines="1"
+        android:lines="1"
+        android:inputType="text"
+        />
+        />
 
     <TextView
         android:id="@+id/textView2"
