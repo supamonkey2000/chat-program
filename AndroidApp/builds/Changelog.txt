@@ -21,3 +21,8 @@ v 0.2.5
 - Changed notification icon
 - Changed app icon
 (Use with server 0.5.2 or later)
+
+v 0.2.6
+- Fixed colon bug; they now display properly
+- Version control updates
+(Use with server 0.5.2 or later)
