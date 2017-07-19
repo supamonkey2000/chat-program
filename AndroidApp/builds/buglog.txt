@@ -1,0 +1,5 @@
+v 0.2.2
+- App resets UI if rotated (FIXED in 0.2.3)
+
+v 0.2.3
+- Colons : dont show up in date and time or after the username that sent a message (NOT fixed)

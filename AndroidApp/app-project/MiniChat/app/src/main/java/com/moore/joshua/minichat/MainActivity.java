@@ -1,5 +1,6 @@
 package com.moore.joshua.minichat;
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -64,9 +65,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void notifications() { // Display a notification whenever a message is received (fixes required)
-        NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this).setSmallIcon(R.mipmap.ic_launcher_chatva).setContentTitle("MiniChat Message").setContentText(theMessage);
+        NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this).setSmallIcon(R.mipmap.ic_launcher_chatva).setContentTitle("Chatva Message").setContentText(theMessage);
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(1,mBuilder.build());
+        Notification note = mBuilder.build();
+        note.defaults |= Notification.DEFAULT_VIBRATE;
+        note.defaults |= Notification.DEFAULT_SOUND;
+        mNotificationManager.notify(1,note);
     }
 
     private class ListenTask extends AsyncTask<Object, String, Object> { // This class waits for messages to be received
@@ -167,7 +171,15 @@ public class MainActivity extends AppCompatActivity {
             try {
                 System.out.println("sending the damn thing\n"); // I got mad here cause it didn't work
                 System.out.println(massage); // Debug
-                sOutput.writeObject("1:"+massage); // Send the message (massage?)
+                if(massage.toLowerCase().contains("logout")) {
+                    sOutput.writeObject("2:LOGOUT");
+                }
+                else if(massage.toLowerCase().contains("whoisin")) {
+                    sOutput.writeObject("0:WHOISIN");
+                }
+                else {
+                    sOutput.writeObject("1:" + massage); // Send the message (massage?)
+                }
                 System.out.println("flushing the damn thing\n"); // Still mad I guess
                 sOutput.flush(); // Flush the OutputStream for more messages
                 System.out.println("done"); // The first time I saw this I was very happy

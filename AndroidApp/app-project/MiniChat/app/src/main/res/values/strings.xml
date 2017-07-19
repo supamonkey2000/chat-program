@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Chatva</string>
-    <string name="version">v 0.2.2</string>
+    <string name="version">v 0.2.3</string>
+    <string name="defaultip">192.168.1.101</string>
+    <string name="ipfieldhint">IP Address</string>
+    <string name="_defaultport">1500</string>
+    <string name="portfieldhint">Port</string>
+    <string name="connecttext">Connect</string>
+    <string name="messagefieldhint">Message</string>
+    <string name="username">defaultusername</string>
 </resources>

@@ -140,8 +140,8 @@ public class ClientGUI extends JFrame implements ActionListener {
 			// disable login button
 			login.setEnabled(false);
 			// enable the 2 buttons
-			logout.setEnabled(true);
-			whoIsIn.setEnabled(true);
+			logout.setEnabled(false);
+			whoIsIn.setEnabled(false);
 			// disable the Server and Port JTextField
 			tfServer.setEditable(false);
 			tfPort.setEditable(false);

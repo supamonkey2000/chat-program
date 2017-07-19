@@ -3,3 +3,6 @@ v 0.5.0
 
 v 0.5.1
 - Added parameters for executing in a terminal
+
+v 0.5.2
+- Disabled Logout and Whoisin buttons until proper fix is found

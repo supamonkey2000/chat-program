@@ -144,7 +144,6 @@ public class Server {
 			boolean keepGoing = true;
 			while(keepGoing) {
 				try {
-					//cm = (ChatMessage) sInput.readObject();
 					String data = sInput.readObject().toString();
 					String[] splitdata = data.split(":");
 					int type = Integer.parseInt(splitdata[0]);

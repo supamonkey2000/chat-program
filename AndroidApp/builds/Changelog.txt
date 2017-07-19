@@ -5,3 +5,11 @@ v 0.2.1
 v 0.2.2
 - Bug Fixes
 (Use with server 0.5.0 or later)
+
+v 0.2.3
+- Fixed reset on rotate bug
+- Minor change to username field
+- Strings are no longer hard-coded
+- Notifications vibrate
+(Use with server 0.5.0 or later)
+
