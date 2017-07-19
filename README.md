@@ -1,4 +1,7 @@
 # chat-program (Chatva)
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9cfa02d88a3d40f2969fe0d1b009a853)](https://www.codacy.com/app/joshuamoore235/chat-program?utm_source=github.com&utm_medium=referral&utm_content=supamonkey2000/chat-program&utm_campaign=badger)
+
 Java based client-server chat program for desktop and Android\*.
 
 **Current versions:**
