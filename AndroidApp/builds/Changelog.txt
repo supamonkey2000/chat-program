@@ -36,3 +36,8 @@ v 0.2.8
 - Port text field now has a numerical keyboard
 - IP text field now has a numerical keyboard
 (Use with server 0.5.2 or later)
+
+v 0.2.9
+- Cleaned code to minimize file size
+- Modernized behind the scenes settings
+(Use with server 0.5.2 or later)

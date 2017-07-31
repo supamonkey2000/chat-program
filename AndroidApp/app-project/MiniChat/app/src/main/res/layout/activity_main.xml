@@ -77,7 +77,6 @@
         android:lines="1"
         android:inputType="text"
         />
-        />
 
     <TextView
         android:id="@+id/textView2"
