@@ -41,3 +41,7 @@ v 0.2.9
 - Cleaned code to minimize file size
 - Modernized behind the scenes settings
 (Use with server 0.5.2 or later)
+
+v 0.2.9-s
+- Signed APK for Play Store
+(Use with server 0.5.2 or later)
